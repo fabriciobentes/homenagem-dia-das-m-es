@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cely 🌸 A Melhor Mãe do Mundo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --sun:   #FF9500;
+  --coral: #FF5F57;
+  --mint:  #30C88F;
+  --sky:   #4EADEA;
+  --lemon: #FFE566;
+  --warm:  #FFF8EE;
+  --warm2: #FFF0D6;
+  --ink:   #1C0F00;
+  --muted: #7A5C3A;
+  --white: #FFFFFF;
+  --fd: 'Fraunces', Georgia, serif;
+  --fb: 'Plus Jakarta Sans', sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--fb); background: var(--warm); color: var(--ink); overflow-x: hidden; }
+
+/* CONFETES */
+#conf-layer { position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden; }
+.conf { position:absolute; bottom:-60px; border-radius:50%; animation:rise linear forwards; will-change:transform; }
+@keyframes rise {
+  0%   { transform:translateY(0) rotate(0deg) scale(1); opacity:.65; }
+  100% { transform:translateY(-115vh) rotate(600deg) scale(.15); opacity:0; }
+}
+
+/* PLAYER */
+#yt-anchor { position:fixed; width:1px; height:1px; opacity:0; pointer-events:none; top:0; left:0; }
+
+/* PILL */
+#pill {
+  position:fixed; bottom:22px; left:50%; transform:translateX(-50%);
+  z-index:9000; background:white; border-radius:60px;
+  padding:10px 18px 10px 14px; display:flex; align-items:center; gap:12px;
+  box-shadow:0 8px 40px rgba(255,149,0,.2), 0 2px 8px rgba(0,0,0,.07);
+  border:1.5px solid rgba(255,149,0,.22); white-space:nowrap;
+  transition:opacity .4s, transform .4s;
+}
+.wv { display:flex; align-items:flex-end; gap:3px; height:20px; }
+.wv span { display:block; width:3px; border-radius:3px; background:var(--sun); animation:wv .7s ease-in-out infinite alternate; }
+.wv span:nth-child(1){height:7px; animation-delay:.00s}
+.wv span:nth-child(2){height:16px;animation-delay:.12s}
+.wv span:nth-child(3){height:10px;animation-delay:.24s}
+.wv span:nth-child(4){height:18px;animation-delay:.08s}
+.wv span:nth-child(5){height:6px; animation-delay:.20s}
+@keyframes wv { from{transform:scaleY(.3)} to{transform:scaleY(1)} }
+.wv.off span { animation-play-state:paused; transform:scaleY(.3); }
+#pill .lbl { font-size:12.5px; font-weight:600; color:var(--muted); }
+#btn-play {
+  border:none; background:var(--sun); color:white;
+  width:32px; height:32px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:12px; cursor:pointer; transition:.25s; flex-shrink:0;
+}
+#btn-play:hover { background:var(--coral); transform:scale(1.12); }
+
+/* HERO */
+.hero {
+  min-height:100svh; display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  text-align:center; padding:60px 24px 100px;
+  position:relative; z-index:2; overflow:hidden;
+}
+.hero::before,.hero::after {
+  content:""; position:absolute; border-radius:50%;
+  filter:blur(90px); pointer-events:none; z-index:0;
+}
+.hero::before {
+  width:650px; height:650px;
+  background:radial-gradient(circle,rgba(255,229,102,.5),transparent 70%);
+  top:-180px; left:-180px;
+}
+.hero::after {
+  width:520px; height:520px;
+  background:radial-gradient(circle,rgba(255,95,87,.28),transparent 70%);
+  bottom:-120px; right:-120px;
+}
+.htag {
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--lemon); color:var(--ink);
+  border-radius:60px; padding:7px 18px;
+  font-size:11px; font-weight:700; letter-spacing:.14em;
+  text-transform:uppercase; margin-bottom:32px;
+  position:relative; z-index:1;
+  box-shadow:0 4px 16px rgba(255,230,0,.35);
+}
+.hname {
+  font-family:var(--fd); font-size:clamp(5rem,14vw,13rem);
+  font-weight:900; line-height:.9; color:var(--coral);
+  letter-spacing:-.02em; position:relative; z-index:1;
+  text-shadow:6px 6px 0 rgba(255,95,87,.13);
+}
+.hsub {
+  font-family:var(--fd); font-style:italic;
+  font-size:clamp(1.4rem,3.5vw,2.5rem);
+  color:var(--sun); margin-top:14px;
+  position:relative; z-index:1;
+}
+.htxt {
+  max-width:550px; margin:34px auto 0;
+  line-height:1.95; color:var(--muted); font-size:1.05rem;
+  position:relative; z-index:1;
+}
+.hbtns {
+  margin-top:42px; display:flex; gap:14px; flex-wrap:wrap;
+  justify-content:center; position:relative; z-index:1;
+}
+.btn {
+  border:none; cursor:pointer; font-family:var(--fb);
+  font-size:.95rem; font-weight:700; border-radius:60px;
+  padding:16px 32px; transition:.3s cubic-bezier(.22,1,.36,1);
+  letter-spacing:.02em;
+}
+.btn.p { background:linear-gradient(135deg,var(--coral),#FF3A30); color:white; box-shadow:0 10px 30px rgba(255,95,87,.32); }
+.btn.p:hover { transform:translateY(-4px) scale(1.04); }
+.btn.s { background:white; color:var(--ink); border:2px solid rgba(255,149,0,.28); }
+.btn.s:hover { transform:translateY(-4px); border-color:var(--sun); }
+.scroll-hint {
+  position:absolute; bottom:28px; left:50%; transform:translateX(-50%);
+  display:flex; flex-direction:column; align-items:center; gap:7px;
+  color:var(--muted); font-size:.72rem; letter-spacing:.1em;
+  text-transform:uppercase; z-index:2;
+  animation:bob 2s ease-in-out infinite;
+}
+@keyframes bob { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+.scroll-hint i { font-size:17px; color:var(--sun); }
+
+/* SEÇÃO */
+.sec { max-width:1240px; margin:auto; padding:100px 28px; position:relative; z-index:2; }
+.eyebrow {
+  display:inline-flex; align-items:center; gap:10px;
+  font-size:11px; font-weight:700; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--sun); margin-bottom:14px;
+}
+.eyebrow::after { content:""; flex:1; min-width:28px; height:2px; background:var(--sun); border-radius:2px; }
+.sh2 {
+  font-family:var(--fd); font-size:clamp(2.4rem,5vw,4.5rem);
+  font-weight:900; line-height:1.05; color:var(--ink);
+}
+.sh2 em { font-style:italic; color:var(--coral); }
+.sp { margin-top:16px; max-width:500px; line-height:1.85; color:var(--muted); }
+
+/* VIRTUES */
+.vgrid {
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:18px; margin-top:56px;
+}
+.vcard {
+  background:white; border-radius:20px; padding:38px 30px;
+  transition:.4s cubic-bezier(.22,1,.36,1); cursor:default;
+  position:relative; overflow:hidden; border:2px solid transparent;
+}
+.vcard::before {
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(135deg,var(--c1),var(--c2));
+  opacity:0; transition:.4s; border-radius:inherit;
+}
+.vcard:hover { transform:translateY(-10px) rotate(-.6deg); box-shadow:0 24px 60px rgba(0,0,0,.1); }
+.vcard:hover::before { opacity:1; }
+.vcard:hover .vi,.vcard:hover .vt,.vcard:hover .vp { color:white; }
+.vi { font-size:34px; margin-bottom:18px; transition:.3s; position:relative;z-index:1; color:var(--c1); }
+.vt { font-family:var(--fd); font-size:1.5rem; font-weight:700; margin-bottom:12px; transition:.3s; position:relative;z-index:1; }
+.vp { font-size:.9rem; line-height:1.75; color:var(--muted); transition:.3s; position:relative;z-index:1; }
+
+/* QUOTE */
+.qband {
+  background:var(--lemon); padding:80px 28px;
+  text-align:center; position:relative; z-index:2; overflow:hidden;
+}
+.qband::before {
+  content:"\201C"; position:absolute; top:-60px; left:0;
+  font-family:var(--fd); font-size:320px; font-weight:900;
+  color:rgba(180,150,0,.12); line-height:1; pointer-events:none;
+}
+.qband blockquote {
+  font-family:var(--fd); font-size:clamp(1.5rem,4vw,3rem);
+  font-weight:700; font-style:italic; line-height:1.3;
+  max-width:800px; margin:auto; color:var(--ink); position:relative;z-index:1;
+}
+.qband cite {
+  display:block; margin-top:22px; font-family:var(--fb);
+  font-style:normal; font-size:.88rem; font-weight:600;
+  color:var(--muted); letter-spacing:.12em; text-transform:uppercase;
+}
+
+/* GALERIA MOSAICO */
+.mosaic { columns:3; column-gap:14px; margin-top:56px; }
+.tile {
+  break-inside:avoid; margin-bottom:14px;
+  border-radius:14px; overflow:hidden;
+  position:relative; cursor:pointer;
+  background-image:linear-gradient(90deg,#ffe9cc 25%,#fff4e0 50%,#ffe9cc 75%);
+  background-size:200% 100%; animation:shimmer 1.4s infinite;
+}
+.tile.ready { background-image:none; animation:none; background:var(--warm2); }
+@keyframes shimmer { from{background-position:200% 0} to{background-position:-200% 0} }
+.tile img,.tile video { display:block; width:100%; object-fit:cover; transition:transform 1s cubic-bezier(.22,1,.36,1); }
+.tile:hover img,.tile:hover video { transform:scale(1.07); }
+.tile-cap {
+  position:absolute; inset:0;
+  background:linear-gradient(to top,rgba(28,15,0,.78) 0%,transparent 55%);
+  display:flex; align-items:flex-end; padding:18px 16px;
+  opacity:0; transition:opacity .4s;
+}
+.tile:hover .tile-cap { opacity:1; }
+.tile-cap span {
+  color:white; font-size:.85rem; font-weight:600;
+  font-family:var(--fd); font-style:italic; line-height:1.4;
+}
+
+/* LIGHTBOX */
+#lb {
+  position:fixed; inset:0;
+  background:rgba(28,15,0,.94);
+  backdrop-filter:blur(14px);
+  z-index:9800; display:none;
+  align-items:center; justify-content:center; padding:20px;
+  flex-direction:column; gap:16px;
+}
+#lb.on { display:flex; }
+#lb-img {
+  max-width:90vw; max-height:82svh;
+  object-fit:contain; border-radius:10px;
+  animation:popIn .35s cubic-bezier(.34,1.56,.64,1);
+  box-shadow:0 40px 120px rgba(0,0,0,.6);
+}
+@keyframes popIn { from{opacity:0;transform:scale(.72)} to{opacity:1;transform:scale(1)} }
+#lb-cap {
+  color:rgba(255,255,255,.65); font-family:var(--fd);
+  font-style:italic; font-size:1.05rem; text-align:center;
+  max-width:500px; line-height:1.5;
+}
+#lb-close {
+  position:absolute; top:18px; right:18px;
+  background:rgba(255,255,255,.1); border:none;
+  color:white; width:44px; height:44px; border-radius:50%;
+  font-size:17px; cursor:pointer; transition:.25s;
+  display:flex; align-items:center; justify-content:center;
+}
+#lb-close:hover { background:var(--coral); transform:scale(1.1); }
+
+/* KIKO */
+.kiko-box {
+  background:var(--ink); border-radius:22px; overflow:hidden;
+  position:relative; aspect-ratio:16/9; margin-top:56px;
+  box-shadow:0 30px 80px rgba(28,15,0,.28);
+}
+.kiko-box iframe { position:absolute; inset:0; width:100%; height:100%; border:none; }
+.kiko-note { margin-top:18px; text-align:center; color:var(--muted); font-family:var(--fd); font-style:italic; }
+
+/* METER */
+.meter-band {
+  background:linear-gradient(135deg,var(--coral),#FF3A30,var(--sun));
+  padding:100px 28px; text-align:center;
+  position:relative; z-index:2; overflow:hidden;
+}
+.meter-band::before {
+  content:""; position:absolute; inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='48' height='48' viewBox='0 0 48 48' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='24' cy='24' r='1.5' fill='rgba(255,255,255,.1)'/%3E%3C/svg%3E");
+  pointer-events:none;
+}
+.meter-band .sh2 { color:white; }
+.meter-band .sh2 em { color:var(--lemon); }
+.bar-track { width:100%; max-width:580px; height:10px; background:rgba(255,255,255,.22); border-radius:60px; overflow:hidden; margin:48px auto 26px; }
+.bar-fill { width:0%; height:100%; background:white; border-radius:60px; transition:3.8s cubic-bezier(.22,1,.36,1); }
+.mbig { font-family:var(--fd); font-size:clamp(5rem,15vw,11rem); font-weight:900; color:white; line-height:1; }
+.mnote { color:rgba(255,255,255,.6); margin-top:12px; font-size:.95rem; letter-spacing:.06em; }
+
+/* FOOTER */
+footer { padding:130px 28px 80px; text-align:center; position:relative; z-index:2; }
+.footer-emoji { font-size:5rem; display:block; margin-bottom:28px; }
+footer h2 { font-family:var(--fd); font-size:clamp(2.8rem,7vw,6.5rem); font-weight:900; line-height:1; color:var(--ink); margin-bottom:26px; }
+footer h2 em { color:var(--coral); font-style:italic; }
+footer p { max-width:540px; margin:auto; line-height:2.1; color:var(--muted); font-size:1.05rem; }
+.assinatura { margin-top:48px; font-family:var(--fd); font-size:2rem; font-style:italic; color:var(--coral); font-weight:700; }
+
+/* MODAL */
+#modal {
+  position:fixed; inset:0; background:rgba(28,15,0,.72);
+  backdrop-filter:blur(10px); z-index:9900;
+  display:none; align-items:center; justify-content:center; padding:20px;
+}
+#modal.on { display:flex; }
+.mcard {
+  background:var(--warm); border-radius:26px; padding:68px 50px;
+  max-width:600px; width:100%; text-align:center;
+  animation:popIn .5s cubic-bezier(.34,1.56,.64,1);
+  position:relative; overflow:hidden;
+}
+.mcard::before {
+  content:""; position:absolute; inset:0; border-radius:inherit;
+  background:radial-gradient(circle at 10% 10%,rgba(255,229,102,.35),transparent 50%),
+             radial-gradient(circle at 90% 90%,rgba(255,95,87,.12),transparent 50%);
+  pointer-events:none;
+}
+.mcard .micon { font-size:58px; margin-bottom:22px; }
+.mcard h2 { font-family:var(--fd); font-size:3rem; font-weight:900; color:var(--coral); margin-bottom:22px; position:relative;z-index:1; }
+.mcard p { line-height:2.1; color:var(--muted); font-size:1.04rem; position:relative;z-index:1; }
+.mcard .mbtn {
+  margin-top:34px; border:none; cursor:pointer;
+  background:linear-gradient(135deg,var(--coral),#FF3A30);
+  color:white; padding:16px 36px; border-radius:60px;
+  font-family:var(--fb); font-weight:700; font-size:.95rem;
+  box-shadow:0 10px 30px rgba(255,95,87,.32);
+  transition:.3s; position:relative;z-index:1;
+}
+.mcard .mbtn:hover { transform:translateY(-4px) scale(1.05); }
+
+/* ─── TABLET ≤768px ─── */
+@media(max-width:768px){
+  .hero { padding:50px 20px 90px; }
+  .hname { font-size:clamp(4.5rem,22vw,7rem); }
+  .hsub  { font-size:clamp(1.1rem,4.5vw,1.8rem); }
+  .htxt  { font-size:.97rem; margin-top:24px; }
+  .hbtns { flex-direction:column; align-items:center; margin-top:32px; }
+  .btn   { width:100%; max-width:320px; text-align:center; padding:15px 20px; }
+  .sec   { padding:72px 20px; }
+  .sh2   { font-size:clamp(2rem,7vw,3.2rem); }
+  .vgrid { grid-template-columns:1fr 1fr; gap:14px; margin-top:40px; }
+  .vcard { padding:28px 22px; }
+  .vi    { font-size:28px; }
+  .vt    { font-size:1.25rem; }
+  .qband { padding:60px 22px; }
+  .qband::before { font-size:200px; top:-30px; }
+  .qband blockquote { font-size:clamp(1.3rem,4.5vw,2rem); }
+  .mosaic { columns:2; column-gap:10px; margin-top:40px; }
+  .tile   { margin-bottom:10px; border-radius:10px; }
+  #pill .lbl { font-size:11.5px; }
+  #lb-img { max-height:72svh; }
+  #lb-cap { font-size:.9rem; }
+  .kiko-box { border-radius:14px; margin-top:40px; }
+  .meter-band { padding:72px 20px; }
+  .mbig { font-size:clamp(4rem,18vw,8rem); }
+  .bar-track { margin:36px auto 22px; }
+  footer { padding:90px 20px 60px; }
+  .footer-emoji { font-size:4rem; }
+  footer h2 { font-size:clamp(2.4rem,10vw,4rem); }
+  .assinatura { font-size:1.6rem; }
+  .mcard { padding:48px 28px; }
+  .mcard h2 { font-size:2.4rem; }
+  .mcard p  { font-size:.97rem; }
+  .mcard .mbtn { padding:15px 28px; }
+}
+
+/* ─── MOBILE ≤480px ─── */
+@media(max-width:480px){
+  .hero { padding:44px 18px 80px; }
+  .htag { font-size:10px; padding:6px 14px; margin-bottom:24px; }
+  .hname { font-size:clamp(4rem,24vw,6rem); }
+  .hsub  { font-size:clamp(1rem,4.8vw,1.4rem); margin-top:10px; }
+  .htxt  { font-size:.93rem; line-height:1.85; margin-top:20px; }
+  .hbtns { margin-top:28px; gap:12px; }
+  .btn   { font-size:.88rem; padding:14px 18px; }
+  .scroll-hint { font-size:.65rem; bottom:20px; }
+  .sec   { padding:60px 16px; }
+  .eyebrow { font-size:10px; }
+  .sh2 { font-size:clamp(1.8rem,8vw,2.6rem); line-height:1.1; }
+  .sp  { font-size:.9rem; }
+  /* virtudes: 1 coluna */
+  .vgrid { grid-template-columns:1fr; gap:12px; margin-top:32px; }
+  .vcard { padding:26px 20px; border-radius:16px; }
+  .vcard::before { opacity:.08; } /* toque de cor sutil sem hover */
+  .vi { font-size:26px; margin-bottom:14px; }
+  .vt { font-size:1.2rem; margin-bottom:8px; }
+  .vp { font-size:.88rem; }
+  /* quote */
+  .qband { padding:50px 18px; }
+  .qband::before { font-size:140px; top:-20px; }
+  .qband blockquote { font-size:clamp(1.15rem,5vw,1.6rem); line-height:1.45; }
+  .qband cite { font-size:.8rem; margin-top:16px; }
+  /* galeria: 1 coluna + legenda sempre visível no touch */
+  .mosaic { columns:1; margin-top:32px; }
+  .tile   { margin-bottom:10px; border-radius:10px; }
+  .tile-cap { opacity:1; }
+  /* pill: esconde texto, mostra só ondas + botão */
+  #pill { padding:9px 14px 9px 12px; gap:9px; bottom:16px; }
+  #pill .lbl { display:none; }
+  .wv { height:18px; }
+  /* lightbox */
+  #lb { padding:14px; }
+  #lb-img { max-width:95vw; max-height:65svh; border-radius:8px; }
+  #lb-cap { font-size:.82rem; padding:0 10px; }
+  #lb-close { top:10px; right:10px; width:38px; height:38px; font-size:15px; }
+  /* kiko */
+  .kiko-box { border-radius:12px; margin-top:32px; }
+  .kiko-note { font-size:.88rem; }
+  /* meter */
+  .meter-band { padding:60px 18px; }
+  .mbig { font-size:clamp(3.5rem,20vw,6rem); }
+  .mnote { font-size:.85rem; }
+  .bar-track { margin:28px auto 18px; height:8px; }
+  /* footer */
+  footer { padding:72px 18px 50px; }
+  .footer-emoji { font-size:3.2rem; margin-bottom:20px; }
+  footer h2 { font-size:clamp(2rem,10vw,3rem); margin-bottom:20px; }
+  footer p  { font-size:.94rem; line-height:1.9; }
+  .assinatura { font-size:1.4rem; margin-top:36px; }
+  /* modal: sobe da parte de baixo da tela */
+  #modal { padding:16px; align-items:flex-end; }
+  .mcard { padding:40px 22px 36px; border-radius:24px 24px 20px 20px; max-height:90svh; overflow-y:auto; }
+  .mcard .micon { font-size:46px; margin-bottom:16px; }
+  .mcard h2 { font-size:2rem; margin-bottom:16px; }
+  .mcard p  { font-size:.91rem; line-height:1.95; }
+  .mcard .mbtn { width:100%; padding:15px; margin-top:26px; }
+}
+
+/* ─── MUITO PEQUENO ≤360px ─── */
+@media(max-width:360px){
+  .hname { font-size:clamp(3.2rem,22vw,5rem); }
+  .hsub  { font-size:1rem; }
+  .sh2   { font-size:1.65rem; }
+  .mcard h2 { font-size:1.75rem; }
+}
+</style>
+</head>
+<body>
+
+<div id="conf-layer"></div>
+<div id="yt-anchor"></div>
+
+<!-- PILL MÚSICA -->
+<div id="pill">
+  <div class="wv off" id="wv"><span></span><span></span><span></span><span></span><span></span></div>
+  <span class="lbl">Música especial pra Cely 🌸</span>
+  <button id="btn-play"><i class="fa-solid fa-play" id="play-icon"></i></button>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="htag"><i class="fa-solid fa-sun"></i> Feliz Dia das Mães · 2025</div>
+  <div class="hname">Cely</div>
+  <div class="hsub">a mulher mais incrível que eu conheço.</div>
+  <p class="htxt">
+    Existem mães incríveis por esse mundo. Existem mães inesquecíveis. Existem mães fortes.
+    E existe você — que é tudo isso junto, com um sorriso que aquece qualquer dia difícil.
+  </p>
+  <div class="hbtns">
+    <button class="btn p" onclick="abrirSurpresa()"><i class="fa-solid fa-heart"></i> Abrir minha surpresa</button>
+    <button class="btn s" onclick="document.getElementById('galeria').scrollIntoView({behavior:'smooth'})"><i class="fa-solid fa-images"></i> Ver nossas fotos</button>
+  </div>
+  <div class="scroll-hint"><i class="fa-solid fa-chevron-down"></i> rolar para ver mais</div>
+</section>
+
+<!-- VIRTUDES -->
+<section class="sec">
+  <div class="eyebrow">O que eu mais amo em você</div>
+  <h2 class="sh2">As razões que fazem<br><em>você ser única.</em></h2>
+  <div class="vgrid">
+    <div class="vcard" style="--c1:#FF5F57;--c2:#FF9500">
+      <div class="vi"><i class="fa-solid fa-heart"></i></div>
+      <div class="vt">Amor sem fim</div>
+      <p class="vp">Mesmo nos meus piores dias, você nunca me deixou sentir que estava sozinho. Esse amor é minha maior certeza.</p>
+    </div>
+    <div class="vcard" style="--c1:#FF9500;--c2:#FFE566">
+      <div class="vi"><i class="fa-solid fa-house-chimney-heart"></i></div>
+      <div class="vt">O meu lar</div>
+      <p class="vp">Lar nunca foi um endereço. Sempre foi onde você estava. Sua presença é a minha paz.</p>
+    </div>
+    <div class="vcard" style="--c1:#30C88F;--c2:#4EADEA">
+      <div class="vi"><i class="fa-solid fa-shield-heart"></i></div>
+      <div class="vt">Guerreira</div>
+      <p class="vp">Você enfrentou o mundo inteiro com um sorriso quando precisou. Sua força me inspira todo dia.</p>
+    </div>
+    <div class="vcard" style="--c1:#4EADEA;--c2:#8B5CF6">
+      <div class="vi"><i class="fa-solid fa-star"></i></div>
+      <div class="vt">A melhor</div>
+      <p class="vp">Não existe ranking, mas se existisse você seria primeiro lugar. Sem discussão. Por unanimidade.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FRASE -->
+<div class="qband">
+  <blockquote>
+    "Minha mãe é minha raiz, meu chão, minha luz —
+    o melhor que existe em mim veio dela."
+    <cite>— Fabricio, com todo o amor do mundo</cite>
+  </blockquote>
+</div>
+
+<!-- GALERIA -->
+<section class="sec" id="galeria">
+  <div class="eyebrow">Nossas memórias</div>
+  <h2 class="sh2">Cada foto guarda<br><em>um pedaço da nossa história.</em></h2>
+  <p class="sp">Clique em qualquer imagem para ver em tamanho cheio. ❤️</p>
+  <div class="mosaic" id="mosaic"></div>
+</section>
+
+<!-- KIKO -->
+<section class="sec" id="kikoSec">
+  <div class="eyebrow">Momento especial</div>
+  <h2 class="sh2">Fabricio tentando<br><em>não chorar.</em></h2>
+  <div class="kiko-box" id="kikoBox"></div>
+  <p class="kiko-note">Sim, isso sou eu. Sem vergonha nenhuma. 😂</p>
+</section>
+
+<!-- METER -->
+<div class="meter-band" id="meterSec">
+  <div style="max-width:700px;margin:auto">
+    <div class="eyebrow" style="color:rgba(255,255,255,.6);justify-content:center">O quanto você importa</div>
+    <h2 class="sh2" style="color:white">Medindo o amor<br><em style="color:var(--lemon)">do Fabricio.</em></h2>
+    <div class="bar-track"><div class="bar-fill" id="barFill"></div></div>
+    <div class="mbig" id="meterBig">0%</div>
+    <p class="mnote">Calculando... (spoiler: não cabe em nenhuma tela)</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-emoji">🌻</span>
+  <h2>Feliz<br><em>Dia das Mães</em></h2>
+  <p>
+    Mãe, obrigado por cada abraço que curou.<br>
+    Por cada noite que você ficou acordada por mim.<br>
+    Por cada sacrifício que você fez sem reclamar.<br>
+    Eu te amo infinitamente — hoje, amanhã e sempre.
+  </p>
+  <div class="assinatura">Com todo o amor, Fabricio 💛</div>
+</footer>
+
+<!-- MODAL SURPRESA -->
+<div id="modal">
+  <div class="mcard">
+    <div class="micon">🌸</div>
+    <h2>A Verdade</h2>
+    <p>
+      Não existe presente no mundo que consiga pagar tudo o que você fez por mim.<br><br>
+      Não existem palavras suficientes para descrever o quanto você é importante.<br><br>
+      Só sei que tenho muita sorte de ter você como mãe.<br><br>
+      <strong>Feliz Dia das Mães, Cely. Eu te amo infinitamente.</strong>
+    </p>
+    <button class="mbtn" onclick="fecharModal()">Ver nossa história 🌻</button>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lb">
+  <button id="lb-close" onclick="fecharLb()"><i class="fa-solid fa-xmark"></i></button>
+  <img id="lb-img" src="" alt="">
+  <div id="lb-cap"></div>
+</div>
+
+<script>
+/* CONFETES */
+const CORES=['#FF9500','#FF5F57','#30C88F','#4EADEA','#FFE566','#FF87B5'];
+function criarConf(){
+  const c=document.createElement('div'); c.className='conf';
+  const s=Math.random()*14+8;
+  c.style.cssText=`left:${Math.random()*100}vw;width:${s}px;height:${s}px;background:${CORES[Math.floor(Math.random()*CORES.length)]};border-radius:${Math.random()>.5?'50%':'4px'};animation-duration:${Math.random()*6+7}s;`;
+  document.getElementById('conf-layer').appendChild(c);
+  setTimeout(()=>c.remove(),13000);
+}
+setInterval(criarConf,400);
+
+/* LEGENDAS ÚNICAS */
+const legendas=[
+  "O sorriso que ilumina qualquer quarto 🌟","Aquele olhar de mãe que diz tudo",
+  "A força que me sustenta todo dia 💪","Beleza que vem de dentro e transborda",
+  "Meu porto seguro 🌊","A rainha da nossa família 👑",
+  "Quem me ensinou que amor é ação","A razão de muita coisa boa na minha vida",
+  "Aqui estava sendo feliz — e me fazendo feliz","Uma lembrança que guardo no coração",
+  "Minha melhor professora, sem diploma nenhum","O lugar mais seguro do mundo: perto de você",
+  "Aquele dia que eu não queria que acabasse","A mulher mais forte que já vi de perto",
+  "Sorria assim pra mim o tempo todo 😄","Memória que vale mais que ouro",
+  "Você no seu elemento — linda demais","Esse sorriso é o meu favorito no mundo",
+  "Tem coisa mais bonita que isso? Não tem.","Uma foto que diz mais que mil palavras",
+  "Meu coração ficou guardado aqui nessa hora","Era pra ser um dia normal — e virou especial",
+  "A pessoa que mais admiro nessa vida","Aquele momento que ficou na memória pra sempre",
+  "Você linda, como sempre 🌸","Juntos — o melhor lugar do mundo",
+  "Esse olhar carinhoso que só você sabe dar","A alegria que você traz sem perceber",
+  "Minha mãe, minha heroína 🦸‍♀️","Momento que guardei no coração faz tempo",
+  "Você sendo você — e isso já é mais que suficiente","O dia em que tudo ficou mais leve",
+  "Carregando amor em cada detalhe","A felicidade que contagia todo mundo ao redor",
+  "Esse sorriso vale uma vida inteira","Simples, bonito, perfeito — igual a você",
+  "Eu não troco esse momento por nada","Minha favorita, sem dúvida nenhuma",
+  "Essa foto me faz sorrir toda vez","Você brilhando do jeito que merece 💫",
+  "Aqui o amor tava presente demais","Onde você está, está o meu lar",
+  "Obrigado por esse dia, e por todos os outros","Minha mãe, meu exemplo de vida",
+  "Uma história contada em imagem","O jeito que você olha pra mim me diz tudo",
+  "Perfeita em cada momento, em cada foto","A melhor — simplesmente a melhor 💛",
+];
+
+/* GALERIA */
+const TOTAL_FOTOS=48, TOTAL_VIDEOS=1;
+const mosaic=document.getElementById('mosaic');
+
+for(let i=1;i<=TOTAL_FOTOS;i++){
+  const div=document.createElement('div'); div.className='tile';
+  const leg=legendas[(i-1)%legendas.length];
+  const img=document.createElement('img');
+  img.loading='lazy'; img.decoding='async'; img.alt=leg;
+  img.src=`img/img (${i}).jpg`;
+  img.addEventListener('load',()=>div.classList.add('ready'));
+  img.addEventListener('error',()=>div.classList.add('ready'));
+  const cap=document.createElement('div'); cap.className='tile-cap';
+  cap.innerHTML=`<span>${leg}</span>`;
+  div.appendChild(img); div.appendChild(cap);
+  div.addEventListener('click',()=>abrirLb(img.src,leg));
+  mosaic.appendChild(div);
+}
+for(let i=1;i<=TOTAL_VIDEOS;i++){
+  const div=document.createElement('div'); div.className='tile ready';
+  const vid=document.createElement('video');
+  vid.src=`img/video (${i}).mp4`; vid.autoplay=vid.muted=vid.loop=vid.playsInline=true;
+  const cap=document.createElement('div'); cap.className='tile-cap';
+  cap.innerHTML='<span>Nossa história, em movimento 🎬</span>';
+  div.appendChild(vid); div.appendChild(cap);
+  mosaic.appendChild(div);
+}
+
+/* LIGHTBOX */
+function abrirLb(src,cap){
+  document.getElementById('lb-img').src=src;
+  document.getElementById('lb-cap').textContent=cap;
+  document.getElementById('lb').classList.add('on');
+}
+function fecharLb(){ document.getElementById('lb').classList.remove('on'); }
+document.getElementById('lb').addEventListener('click',e=>{ if(e.target===document.getElementById('lb')) fecharLb(); });
+
+/* KIKO */
+let kikoLoaded=false;
+new IntersectionObserver(entries=>{
+  const e=entries[0];
+  if(e.isIntersecting&&!kikoLoaded){
+    kikoLoaded=true;
+    document.getElementById('kikoBox').innerHTML=`<iframe src="https://www.youtube.com/embed/jWUvqu9hb4o?autoplay=1&mute=1&rel=0&modestbranding=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+    if(ytReady&&isPlaying) ytPlayer.setVolume(4);
+  }
+  if(!e.isIntersecting&&ytReady&&isPlaying) ytPlayer.setVolume(18);
+},{threshold:.4}).observe(document.getElementById('kikoSec'));
+
+/* METER */
+let mDone=false;
+new IntersectionObserver(entries=>{
+  if(entries[0].isIntersecting&&!mDone){
+    mDone=true;
+    document.getElementById('barFill').style.width='100%';
+    let n=0; const iv=setInterval(()=>{ n++; document.getElementById('meterBig').textContent=n+'%'; if(n>=100){clearInterval(iv);setTimeout(()=>{document.getElementById('meterBig').textContent='∞';},400);} },28);
+  }
+},{threshold:.5}).observe(document.getElementById('meterSec'));
+
+/* MODAL */
+function abrirSurpresa(){ document.getElementById('modal').classList.add('on'); explodir(); iniciarMusicaSeNecessario(); }
+function fecharModal(){ document.getElementById('modal').classList.remove('on'); }
+function explodir(){
+  for(let i=0;i<60;i++){
+    const el=document.createElement('span');
+    el.textContent=['🌸','💛','🌻','❤️','⭐'][Math.floor(Math.random()*5)];
+    el.style.cssText=`position:fixed;left:50%;top:50%;font-size:${Math.random()*24+14}px;pointer-events:none;z-index:99999`;
+    document.body.appendChild(el);
+    const x=(Math.random()-.5)*900,y=(Math.random()-.5)*900;
+    el.animate([{transform:'translate(0,0) scale(1)',opacity:1},{transform:`translate(${x}px,${y}px) scale(0)`,opacity:0}],{duration:1500,easing:'cubic-bezier(.22,1,.36,1)'});
+    setTimeout(()=>el.remove(),1500);
+  }
+}
+
+/* ─────────────────────────────────────────
+   YOUTUBE — MÚSICA DE FUNDO
+   
+   Estratégia: o player SÓ É CARREGADO quando
+   o usuário clica em "Abrir minha surpresa".
+   Isso garante:
+   1. Interação real do usuário = browser libera áudio
+   2. Sem erros de CORS em localhost ou GitHub Pages
+   3. Música começa imediatamente junto com o modal
+───────────────────────────────────────── */
+let ytPlayer=null, ytReady=false, isPlaying=false, ytCarregado=false;
+
+/* Chamada quando o botão surpresa é clicado */
+function iniciarMusicaSeNecessario(){
+  if(ytCarregado) return; // já carregou, não faz nada
+  ytCarregado=true;
+
+  // Injeta a API do YouTube dinamicamente — APÓS o clique do usuário
+  const tag=document.createElement('script');
+  tag.src='https://www.youtube.com/iframe_api';
+  document.head.appendChild(tag);
+}
+
+/* Callback da API do YouTube */
+function onYouTubeIframeAPIReady(){
+  ytPlayer=new YT.Player('yt-anchor',{
+    height:'1', width:'1',
+    playerVars:{
+      autoplay:1,          // pode usar autoplay pois veio de gesto do usuário
+      controls:0, disablekb:1, fs:0,
+      modestbranding:1, rel:0, loop:1,
+      listType:'playlist',
+      list:'PLEh0CHYeYP-tO0JUYZPRmn6KI_XoVVpTl'
+    },
+    events:{
+      onReady(e){
+        ytReady=true;
+        e.target.setVolume(22);
+        e.target.playVideo();
+        isPlaying=true;
+        document.getElementById('wv').classList.remove('off');
+        document.getElementById('play-icon').className='fa-solid fa-pause';
+      },
+      onStateChange(e){
+        // Quando termina um vídeo, vai para o próximo
+        if(e.data===YT.PlayerState.ENDED) ytPlayer.nextVideo();
+        // Sincroniza estado do botão
+        if(e.data===YT.PlayerState.PLAYING){
+          isPlaying=true;
+          document.getElementById('wv').classList.remove('off');
+          document.getElementById('play-icon').className='fa-solid fa-pause';
+        }
+        if(e.data===YT.PlayerState.PAUSED){
+          isPlaying=false;
+          document.getElementById('wv').classList.add('off');
+          document.getElementById('play-icon').className='fa-solid fa-play';
+        }
+      },
+      onError(e){
+        // Em caso de erro (vídeo bloqueado etc), tenta o próximo
+        setTimeout(()=>{ if(ytPlayer) ytPlayer.nextVideo(); },2000);
+      }
+    }
+  });
+}
+
+function togglePlay(){
+  // Se ainda não carregou o player, carrega agora
+  if(!ytCarregado){ iniciarMusicaSeNecessario(); return; }
+  if(!ytReady) return;
+  if(isPlaying){
+    ytPlayer.pauseVideo();
+  } else {
+    ytPlayer.playVideo();
+  }
+}
+document.getElementById('btn-play').addEventListener('click', togglePlay);
+</script>
+</body>
+</html>
